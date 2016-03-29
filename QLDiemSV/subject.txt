@@ -1,0 +1,4 @@
+12323|Nhap mon CSDL|58PM1|12015|2
+12343|He quan tri CSDL|58PM2|12015|2
+14323|Phuong phap lap trinh huong doi tuong|58PM1|12015|2
+27663|Phan tich va thiet ke HTTT|58PM1|12015|2
