@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _STUDENT_H_
+#define _STUDENT_H_
 
 #include <string>
 
@@ -16,3 +17,5 @@ public:
 	void Read();
 	void Display();
 };
+
+#endif

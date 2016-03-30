@@ -118,11 +118,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="result.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="subject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="student.cpp" />
     <ClCompile Include="subject.cpp" />
   </ItemGroup>
