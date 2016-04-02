@@ -18,12 +18,16 @@ class QuanLy {
 		QuanLy();
 		~QuanLy();
 		std::vector<std::vector<std::string>> ReadFile(std::string);
+		void ClearFile(std::string);
 		void ReadStudent();
 		void ReadSubject();
 		void ReadResult();
 		void PrintStudent();
 		void PrintSubject();
 		void PrintResult();
+		void WriteStudent();
+		void WriteSubject();
+		void WriteResult();
 		void AddStudent();
 		void AddSubject();
 		void AddResult();

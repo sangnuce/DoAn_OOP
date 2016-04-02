@@ -54,6 +54,12 @@ vector<vector<string>> QuanLy::ReadFile(string filename) {
 	return info;
 }
 
+void QuanLy::ClearFile(string filename) {
+	ofstream file(filename);
+	file.clear();
+	file.close();
+}
+
 void QuanLy::ReadStudent() {
 	vector<vector<string>> info = ReadFile("student.txt");
 	soSV = info.size();
@@ -82,18 +88,16 @@ void QuanLy::ReadResult() {
 }
 
 void QuanLy::PrintStudent() {
-	cout << "| ";
 	cout << left << setw(10) << "Ma SV" << " | ";
 	cout << left << setw(30) << "Ho ten" << " | ";
 	cout << setw(10) << "Ngay sinh" << " | ";
 	cout << left << setw(3) << "GT" << " | ";
 	cout << left << setw(6) << "Lop QL" << endl;
-	cout << "-------------------------------------------------------------------------" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
 	for (int i = 0; i < soSV; i++) {
-		cout << "| ";
 		sv[i].Display();
 	}
-	cout << "-------------------------------------------------------------------------" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
 }
 
 void QuanLy::PrintSubject() {
@@ -114,4 +118,20 @@ void QuanLy::AddStudent() {
 	sv[soSV] = *s;
 	sv[soSV].WriteFile();
 	soSV++;
+}
+
+void QuanLy::AddSubject() {
+	Subject *s = new Subject();
+	s->Read();
+	mh[soMH] = *s;
+	mh[soMH].WriteFile();
+	soMH++;
+}
+
+void QuanLy::AddResult() {
+	Result *s = new Result();
+	s->Read();
+	kq[soKQ] = *s;
+	kq[soKQ].WriteFile();
+	soKQ++;
 }

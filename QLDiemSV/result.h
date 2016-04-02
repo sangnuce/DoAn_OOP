@@ -10,14 +10,13 @@ private:
 	std::string MaSV;
 	float DQT;
 	float DKT;
-	int TrangThai;
 public:
 	Result();
 	Result(Result&);
 	Result(std::string, std::string, std::string, float, float);
 	void Read();
 	void Display();
-	void Delete();
+	void WriteFile();
 };
 
 #endif

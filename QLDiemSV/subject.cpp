@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include "subject.h"
 
@@ -47,4 +48,8 @@ void Subject::Display() {
 	cout << setw(6) << NhomMH << " | ";
 	cout << setw(6) << HocKy << " | ";
 	cout << setw(3) << SoTC << endl;
+}
+void Subject::WriteFile() {
+	ofstream file("subject.txt", ios::app);
+	file << MaMH << "|" << TenMH << "|" << NhomMH << "|" << HocKy << "|" << SoTC << endl;
 }
