@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include "student.h"
 
@@ -27,20 +28,15 @@ Student::Student(string masv, string hoten, string ngaysinh, string gioitinh, st
 }
 void Student::Read() {
 	cout << "Ma SV: ";
-	fflush(stdin);
-	cin >> MaSV;
+	getline(cin, MaSV);
 	cout << "Ho ten: ";
-	fflush(stdin);
-	cin >> HoTen;
+	getline(cin, HoTen);
 	cout << "Ngay sinh: ";
-	fflush(stdin);
-	cin >> NgaySinh;
+	getline(cin, NgaySinh);
 	cout << "Gioi tinh: ";
-	fflush(stdin);
-	cin >> GioiTinh;
+	getline(cin, GioiTinh);
 	cout << "Lop QL: ";
-	fflush(stdin);
-	cin >> LopQL;
+	getline(cin, LopQL);
 }
 void Student::Display() {
 	cout << left << setw(10) << MaSV << " | ";
@@ -48,4 +44,8 @@ void Student::Display() {
 	cout << setw(10) << NgaySinh << " | ";
 	cout << left << setw(3) << GioiTinh << " | ";
 	cout << left << setw(6) << LopQL << endl;
+}
+void Student::WriteFile() {
+	ofstream file("student.txt", ios::app);
+	file << MaSV << "|" << HoTen << "|" << NgaySinh << "|" << GioiTinh << "|" << LopQL << endl;
 }

@@ -10,6 +10,7 @@ Result::Result() {
 	MaSV = "";
 	DQT = 0;
 	DKT = 0;
+	TrangThai = 0;
 }
 Result::Result(Result& rs) {
 	HocKy = rs.HocKy;
@@ -17,6 +18,7 @@ Result::Result(Result& rs) {
 	MaSV = rs.MaSV;
 	DQT = rs.DQT;
 	DKT = rs.DKT;
+	TrangThai = rs.TrangThai;
 }
 Result::Result(string hocky, string mamh, string masv, float dqt, float dkt) {
 	this->HocKy = hocky;
@@ -24,6 +26,7 @@ Result::Result(string hocky, string mamh, string masv, float dqt, float dkt) {
 	this->MaSV = masv;
 	this->DQT = dqt;
 	this->DKT = dkt;
+	this->TrangThai = 1;
 }
 void Result::Read() {
 	cout << "Hoc ky: ";
@@ -47,4 +50,7 @@ void Result::Display() {
 	cout << left << setw(10) << MaSV << " | ";
 	cout << setw(5) << setprecision(1) << DQT << " | ";
 	cout << setw(5) << setprecision(1) << DKT << endl;
+}
+void Result::Delete() {
+	this->TrangThai = 0;
 }
