@@ -118,12 +118,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Exception.h" />
     <ClInclude Include="quanly.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="subject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Exception.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="quanly.cpp" />
     <ClCompile Include="result.cpp" />

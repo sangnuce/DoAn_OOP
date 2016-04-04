@@ -2,25 +2,26 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include "Exception.h"
 #include "quanly.h"
 
 using namespace std;
 
-#define max 100
+#define MAX 100
 
 QuanLy::QuanLy() {
 	soSV = 0;
-	sv = new Student[max];
+	sv = new Student[MAX];
 	soMH = 0;
-	mh = new Subject[max];
+	mh = new Subject[MAX];
 	soKQ = 0;
-	kq = new Result[max*max];
+	kq = new Result[MAX*MAX];
 }
 
 QuanLy::~QuanLy() {
-	delete sv;
-	delete mh;
-	delete kq;
+	delete[] sv;
+	delete[] mh;
+	delete[] kq;
 }
 
 vector<vector<string>> QuanLy::ReadFile(string filename) {
@@ -28,7 +29,7 @@ vector<vector<string>> QuanLy::ReadFile(string filename) {
 	file.open(filename);
 	vector<vector<string>> info;
 	if (file.fail()) {
-		cout << "Cannot open file " << filename << endl;
+		throw Exception("Khong the mo file " + filename + "\n");
 		return info;
 	}
 	while (!file.eof()) {
@@ -61,29 +62,44 @@ void QuanLy::ClearFile(string filename) {
 }
 
 void QuanLy::ReadStudent() {
-	vector<vector<string>> info = ReadFile("student.txt");
-	soSV = info.size();
-	for (int i = 0; i < soSV; i++) {
-		Student *obj = new Student(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
-		sv[i] = *obj;
+	try {
+		vector<vector<string>> info = ReadFile("student.txt");
+		soSV = info.size();
+		for (int i = 0; i < soSV; i++) {
+			Student *obj = new Student(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
+			sv[i] = *obj;
+		}
+	}
+	catch (Exception &ex) {
+		cout << ex.ToString();
 	}
 }
 
 void QuanLy::ReadSubject() {
-	vector<vector<string>> info = ReadFile("subject.txt");
-	soMH = info.size();
-	for (int i = 0; i < soMH; i++) {
-		Subject *obj = new Subject(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
-		mh[i] = *obj;
+	try {
+		vector<vector<string>> info = ReadFile("subject.txt");
+		soMH = info.size();
+		for (int i = 0; i < soMH; i++) {
+			Subject *obj = new Subject(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
+			mh[i] = *obj;
+		}
+	}
+	catch(Exception &ex){
+		cout << ex.ToString();
 	}
 }
 
 void QuanLy::ReadResult() {
-	vector<vector<string>> info = ReadFile("result.txt");
-	soKQ = info.size();
-	for (int i = 0; i < soKQ; i++) {
-		Result *obj = new Result(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
-		kq[i] = *obj;
+	try {
+		vector<vector<string>> info = ReadFile("result.txt");
+		soKQ = info.size();
+		for (int i = 0; i < soKQ; i++) {
+			Result *obj = new Result(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
+			kq[i] = *obj;
+		}
+	}
+	catch (Exception &ex) {
+		cout << ex.ToString();
 	}
 }
 
