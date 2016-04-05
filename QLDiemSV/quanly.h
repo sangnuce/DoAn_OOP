@@ -1,7 +1,6 @@
 #ifndef _QUANLY_H_
 #define _QUANLY_H_
 
-#include <iostream>
 #include <vector>
 #include <string>
 #include "student.h"
@@ -19,15 +18,15 @@ class QuanLy {
 		~QuanLy();
 		std::vector<std::vector<std::string>> ReadFile(std::string);
 		void ClearFile(std::string);
-		void ReadStudent();
-		void ReadSubject();
-		void ReadResult();
+		void ReadStudent(std::string);
+		void ReadSubject(std::string);
+		void ReadResult(std::string);
 		void PrintStudent();
 		void PrintSubject();
 		void PrintResult();
-		void WriteStudent();
-		void WriteSubject();
-		void WriteResult();
+		void WriteStudent(std::string);
+		void WriteSubject(std::string);
+		void WriteResult(std::string);
 		void AddStudent();
 		void AddSubject();
 		void AddResult();

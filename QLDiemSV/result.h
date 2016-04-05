@@ -16,7 +16,7 @@ public:
 	Result(std::string, std::string, std::string, float, float);
 	void Read();
 	void Display();
-	void WriteFile();
+	void WriteFile(std::string);
 };
 
 #endif

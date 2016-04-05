@@ -16,7 +16,7 @@ public:
 	Student(std::string, std::string, std::string, std::string, std::string);
 	void Read();
 	void Display();
-	void WriteFile();
+	void WriteFile(std::string);
 };
 
 #endif

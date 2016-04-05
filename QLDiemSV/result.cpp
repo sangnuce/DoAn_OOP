@@ -43,13 +43,13 @@ void Result::Read() {
 }
 void Result::Display() {
 	cout << fixed;
-	cout << setw(6) << HocKy << " | ";
-	cout << left << setw(10) << MaMH << " | ";
-	cout << left << setw(10) << MaSV << " | ";
-	cout << setw(5) << setprecision(1) << DQT << " | ";
-	cout << setw(5) << setprecision(1) << DKT << endl;
+	cout << right << setw(6) << HocKy << " | ";
+	cout << left << setw(8) << MaMH << " | ";
+	cout << left << setw(8) << MaSV << " | ";
+	cout << right << setw(4) << setprecision(1) << DQT << " | ";
+	cout << right << setw(4) << setprecision(1) << DKT << endl;
 }
-void Result::WriteFile() {
-	ofstream file("result.txt", ios::app);
+void Result::WriteFile(string filename) {
+	ofstream file(filename, ios::app);
 	file << HocKy << "|" << MaMH << "|" << MaSV << "|" << DQT << "|" << DKT << endl;
 }

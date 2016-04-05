@@ -39,13 +39,13 @@ void Student::Read() {
 	getline(cin, LopQL);
 }
 void Student::Display() {
-	cout << left << setw(10) << MaSV << " | ";
+	cout << left << setw(8) << MaSV << " | ";
 	cout << left << setw(30) << HoTen << " | ";
-	cout << setw(10) << NgaySinh << " | ";
-	cout << left << setw(3) << GioiTinh << " | ";
-	cout << left << setw(6) << LopQL << endl;
+	cout << right << setw(10) << NgaySinh << " | ";
+	cout << right << setw(3) << GioiTinh << " | ";
+	cout << right << setw(6) << LopQL << endl;
 }
-void Student::WriteFile() {
-	ofstream file("student.txt", ios::app);
+void Student::WriteFile(string filename) {
+	ofstream file(filename, ios::app);
 	file << MaSV << "|" << HoTen << "|" << NgaySinh << "|" << GioiTinh << "|" << LopQL << endl;
 }

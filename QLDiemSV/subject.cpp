@@ -43,13 +43,13 @@ void Subject::Read() {
 	cin >> SoTC;
 }
 void Subject::Display() {
-	cout << left << setw(10) << MaMH << " | ";
+	cout << left << setw(8) << MaMH << " | ";
 	cout << left << setw(50) << TenMH << " | ";
-	cout << setw(6) << NhomMH << " | ";
-	cout << setw(6) << HocKy << " | ";
-	cout << setw(3) << SoTC << endl;
+	cout << right << setw(7) << NhomMH << " | ";
+	cout << right << setw(6) << HocKy << " | ";
+	cout << right << setw(3) << SoTC << endl;
 }
-void Subject::WriteFile() {
-	ofstream file("subject.txt", ios::app);
+void Subject::WriteFile(string filename) {
+	ofstream file(filename, ios::app);
 	file << MaMH << "|" << TenMH << "|" << NhomMH << "|" << HocKy << "|" << SoTC << endl;
 }

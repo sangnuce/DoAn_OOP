@@ -25,8 +25,7 @@ QuanLy::~QuanLy() {
 }
 
 vector<vector<string>> QuanLy::ReadFile(string filename) {
-	ifstream file;
-	file.open(filename);
+	ifstream file(filename);
 	vector<vector<string>> info;
 	if (file.fail()) {
 		throw Exception("Khong the mo file " + filename + "\n");
@@ -61,13 +60,19 @@ void QuanLy::ClearFile(string filename) {
 	file.close();
 }
 
-void QuanLy::ReadStudent() {
+void QuanLy::ReadStudent(string filename) {
 	try {
-		vector<vector<string>> info = ReadFile("student.txt");
-		soSV = info.size();
-		for (int i = 0; i < soSV; i++) {
-			Student *obj = new Student(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
-			sv[i] = *obj;
+		vector<vector<string>> info = ReadFile(filename);
+		soSV = 0;
+		for (size_t i = 0; i < info.size(); i++) {
+			if (info[i].size() != 5) {
+				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
+			}
+			else {
+				soSV++;
+				Student	*obj = new Student(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
+				sv[i] = *obj;
+			}
 		}
 	}
 	catch (Exception &ex) {
@@ -75,27 +80,39 @@ void QuanLy::ReadStudent() {
 	}
 }
 
-void QuanLy::ReadSubject() {
+void QuanLy::ReadSubject(string filename) {
 	try {
-		vector<vector<string>> info = ReadFile("subject.txt");
-		soMH = info.size();
-		for (int i = 0; i < soMH; i++) {
-			Subject *obj = new Subject(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
-			mh[i] = *obj;
+		vector<vector<string>> info = ReadFile(filename);
+		soMH = 0;
+		for (size_t i = 0; i < info.size(); i++) {
+			if (info[i].size() != 5) {
+				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
+			}
+			else {
+				soMH++;
+				Subject *obj = new Subject(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
+				mh[i] = *obj;
+			}
 		}
 	}
-	catch(Exception &ex){
+	catch (Exception &ex) {
 		cout << ex.ToString();
 	}
 }
 
-void QuanLy::ReadResult() {
+void QuanLy::ReadResult(string filename) {
 	try {
-		vector<vector<string>> info = ReadFile("result.txt");
-		soKQ = info.size();
-		for (int i = 0; i < soKQ; i++) {
-			Result *obj = new Result(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
-			kq[i] = *obj;
+		vector<vector<string>> info = ReadFile(filename);
+		soKQ = 0;
+		for (size_t i = 0; i < info.size(); i++) {
+			if (info[i].size() != 5) {
+				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
+			}
+			else {
+				soKQ++;
+				Result *obj = new Result(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
+				kq[i] = *obj;
+			}
 		}
 	}
 	catch (Exception &ex) {
@@ -104,9 +121,9 @@ void QuanLy::ReadResult() {
 }
 
 void QuanLy::PrintStudent() {
-	cout << left << setw(10) << "Ma SV" << " | ";
+	cout << left << setw(8) << "Ma SV" << " | ";
 	cout << left << setw(30) << "Ho ten" << " | ";
-	cout << setw(10) << "Ngay sinh" << " | ";
+	cout << left << setw(10) << "Ngay sinh" << " | ";
 	cout << left << setw(3) << "GT" << " | ";
 	cout << left << setw(6) << "Lop QL" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
@@ -117,22 +134,36 @@ void QuanLy::PrintStudent() {
 }
 
 void QuanLy::PrintSubject() {
+	cout << left << setw(8) << "Ma MH" << " | ";
+	cout << left << setw(50) << "Ten MH" << " | ";
+	cout << left << setw(7) << "Nhom MH" << " | ";
+	cout << left << setw(6) << "Hoc ky" << " | ";
+	cout << left << setw(3) << "So TC" << endl;
+	cout << "-----------------------------------------------------------------------------------------" << endl;
 	for (int i = 0; i < soMH; i++) {
 		mh[i].Display();
 	}
+	cout << "-----------------------------------------------------------------------------------------" << endl;
 }
 
 void QuanLy::PrintResult() {
+	cout << left << setw(6) << "Hoc ky" << " | ";
+	cout << left << setw(8) << "Ma MH" << " | ";
+	cout << left << setw(8) << "Ma SV" << " | ";
+	cout << right << setw(4) << "DQT" << " | ";
+	cout << right << setw(4) << "DKT" << endl;
+	cout << "-------------------------------------------" << endl;
 	for (int i = 0; i < soKQ; i++) {
 		kq[i].Display();
 	}
+	cout << "-------------------------------------------" << endl;
 }
 
 void QuanLy::AddStudent() {
 	Student *s = new Student();
 	s->Read();
 	sv[soSV] = *s;
-	sv[soSV].WriteFile();
+	//sv[soSV].WriteFile("student.txt");
 	soSV++;
 }
 
@@ -140,7 +171,7 @@ void QuanLy::AddSubject() {
 	Subject *s = new Subject();
 	s->Read();
 	mh[soMH] = *s;
-	mh[soMH].WriteFile();
+	//mh[soMH].WriteFile("subject.txt");
 	soMH++;
 }
 
@@ -148,6 +179,27 @@ void QuanLy::AddResult() {
 	Result *s = new Result();
 	s->Read();
 	kq[soKQ] = *s;
-	kq[soKQ].WriteFile();
+	//kq[soKQ].WriteFile("result.txt");
 	soKQ++;
+}
+
+void QuanLy::WriteStudent(string filename) {
+	ClearFile(filename);
+	for (int i = 0; i < soSV; i++) {
+		sv[i].WriteFile(filename);
+	}
+}
+
+void QuanLy::WriteSubject(string filename) {
+	ClearFile(filename);
+	for (int i = 0; i < soMH; i++) {
+		mh[i].WriteFile(filename);
+	}
+}
+
+void QuanLy::WriteResult(string filename) {
+	ClearFile(filename);
+	for (int i = 0; i < soKQ; i++) {
+		kq[i].WriteFile(filename);
+	}
 }
