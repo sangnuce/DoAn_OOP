@@ -42,14 +42,15 @@ void Result::Read() {
 	cin >> DKT;
 }
 void Result::Display() {
+	cout << setw(6) << HocKy << " | ";
+	cout << setw(8) << MaMH << " | ";
+	cout << setw(8) << MaSV << " | ";
 	cout << fixed;
-	cout << right << setw(6) << HocKy << " | ";
-	cout << left << setw(8) << MaMH << " | ";
-	cout << left << setw(8) << MaSV << " | ";
-	cout << right << setw(4) << setprecision(1) << DQT << " | ";
-	cout << right << setw(4) << setprecision(1) << DKT << endl;
+	cout << setw(4) << setprecision(1) << DQT << " | ";
+	cout << setw(4) << setprecision(1) << DKT << endl;
 }
 void Result::WriteFile(string filename) {
 	ofstream file(filename, ios::app);
 	file << HocKy << "|" << MaMH << "|" << MaSV << "|" << DQT << "|" << DKT << endl;
+	file.close();
 }

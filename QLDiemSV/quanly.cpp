@@ -121,11 +121,12 @@ void QuanLy::ReadResult(string filename) {
 }
 
 void QuanLy::PrintStudent() {
-	cout << left << setw(8) << "Ma SV" << " | ";
+	cout << "----------------------------------------------------------------------" << endl;
+	cout << right << setw(8) << "Ma SV" << " | ";
 	cout << left << setw(30) << "Ho ten" << " | ";
-	cout << left << setw(10) << "Ngay sinh" << " | ";
-	cout << left << setw(3) << "GT" << " | ";
-	cout << left << setw(6) << "Lop QL" << endl;
+	cout << right << setw(10) << "Ngay sinh" << " | ";
+	cout << right << setw(3) << "GT" << " | ";
+	cout << left << "Lop QL" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
 	for (int i = 0; i < soSV; i++) {
 		sv[i].Display();
@@ -134,11 +135,12 @@ void QuanLy::PrintStudent() {
 }
 
 void QuanLy::PrintSubject() {
-	cout << left << setw(8) << "Ma MH" << " | ";
+	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << right << setw(8) << "Ma MH" << " | ";
 	cout << left << setw(50) << "Ten MH" << " | ";
 	cout << left << setw(7) << "Nhom MH" << " | ";
-	cout << left << setw(6) << "Hoc ky" << " | ";
-	cout << left << setw(3) << "So TC" << endl;
+	cout << right << setw(6) << "Hoc ky" << " | ";
+	cout << "So TC" << endl;
 	cout << "-----------------------------------------------------------------------------------------" << endl;
 	for (int i = 0; i < soMH; i++) {
 		mh[i].Display();
@@ -147,11 +149,12 @@ void QuanLy::PrintSubject() {
 }
 
 void QuanLy::PrintResult() {
-	cout << left << setw(6) << "Hoc ky" << " | ";
-	cout << left << setw(8) << "Ma MH" << " | ";
-	cout << left << setw(8) << "Ma SV" << " | ";
-	cout << right << setw(4) << "DQT" << " | ";
-	cout << right << setw(4) << "DKT" << endl;
+	cout << "-------------------------------------------" << endl;
+	cout << setw(6) << "Hoc ky" << " | ";
+	cout << setw(8) << "Ma MH" << " | ";
+	cout << setw(8) << "Ma SV" << " | ";
+	cout << setw(4) << "DQT" << " | ";
+	cout << setw(4) << "DKT" << endl;
 	cout << "-------------------------------------------" << endl;
 	for (int i = 0; i < soKQ; i++) {
 		kq[i].Display();

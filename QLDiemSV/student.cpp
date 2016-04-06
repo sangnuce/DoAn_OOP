@@ -28,24 +28,30 @@ Student::Student(string masv, string hoten, string ngaysinh, string gioitinh, st
 }
 void Student::Read() {
 	cout << "Ma SV: ";
-	getline(cin, MaSV);
+	fflush(stdin);
+	cin >> MaSV;
 	cout << "Ho ten: ";
+	cin.ignore();
 	getline(cin, HoTen);
 	cout << "Ngay sinh: ";
-	getline(cin, NgaySinh);
+	fflush(stdin);
+	cin >> NgaySinh;
 	cout << "Gioi tinh: ";
-	getline(cin, GioiTinh);
+	fflush(stdin);
+	cin >> GioiTinh;
 	cout << "Lop QL: ";
-	getline(cin, LopQL);
+	fflush(stdin);
+	cin >> LopQL;
 }
 void Student::Display() {
-	cout << left << setw(8) << MaSV << " | ";
+	cout << right << setw(8) << MaSV << " | ";
 	cout << left << setw(30) << HoTen << " | ";
 	cout << right << setw(10) << NgaySinh << " | ";
 	cout << right << setw(3) << GioiTinh << " | ";
-	cout << right << setw(6) << LopQL << endl;
+	cout << left << setw(6) << LopQL << endl;
 }
 void Student::WriteFile(string filename) {
 	ofstream file(filename, ios::app);
 	file << MaSV << "|" << HoTen << "|" << NgaySinh << "|" << GioiTinh << "|" << LopQL << endl;
+	file.close();
 }

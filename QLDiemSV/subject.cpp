@@ -31,8 +31,8 @@ void Subject::Read() {
 	fflush(stdin);
 	cin >> MaMH;
 	cout << "Ten MH: ";
-	fflush(stdin);
-	cin >> TenMH;
+	cin.ignore();
+	getline(cin, TenMH);
 	cout << "Nhom MH: ";
 	fflush(stdin);
 	cin >> NhomMH;
@@ -43,13 +43,14 @@ void Subject::Read() {
 	cin >> SoTC;
 }
 void Subject::Display() {
-	cout << left << setw(8) << MaMH << " | ";
+	cout << right << setw(8) << MaMH << " | ";
 	cout << left << setw(50) << TenMH << " | ";
-	cout << right << setw(7) << NhomMH << " | ";
+	cout << left << setw(7) << NhomMH << " | ";
 	cout << right << setw(6) << HocKy << " | ";
 	cout << right << setw(3) << SoTC << endl;
 }
 void Subject::WriteFile(string filename) {
 	ofstream file(filename, ios::app);
 	file << MaMH << "|" << TenMH << "|" << NhomMH << "|" << HocKy << "|" << SoTC << endl;
+	file.close();
 }
