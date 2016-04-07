@@ -24,17 +24,23 @@ class QuanLy {
 		void PrintStudent();
 		void PrintSubject();
 		void PrintResult();
-		void WriteStudent(std::string);
-		void WriteSubject(std::string);
-		void WriteResult(std::string);
+		int FindStudent(std::string = "");
+		int FindSubject(std::string = "");
+		int FindResult(std::string = "", std::string = "");
 		void AddStudent();
 		void AddSubject();
 		void AddResult();
+		void EditStudent();
+		void EditSubject();
+		void EditResult();
 		void RemoveStudent(std::string = "");
 		void RemoveSubject(std::string = "");
 		void RemoveResult(std::string = "", std::string = "");
 		void RemoveResultByStudent(std::string = "");
 		void RemoveResultBySubject(std::string = "");
+		void WriteStudent(std::string);
+		void WriteSubject(std::string);
+		void WriteResult(std::string);
 };
 
 #endif

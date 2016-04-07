@@ -22,61 +22,64 @@ int main() {
 		cout << setw(30) << "4.  Them moi sinh vien";
 		cout << setw(30) << "5.  Them moi mon hoc";
 		cout << setw(30) << "6.  Them moi ket qua" << endl;
-		cout << setw(30) << "7.  Xoa sinh vien";
-		cout << setw(30) << "8.  Xoa mon hoc";
-		cout << setw(30) << "9.  Xoa ket qua" << endl;
-		cout << setw(30) << "10. Luu danh sach sinh vien";
-		cout << setw(30) << "11. Luu danh sach mon hoc";
-		cout << setw(30) << "12. Luu danh sach ket qua" << endl;
+		cout << setw(30) << "7.  Sua sinh vien";
+		cout << setw(30) << "8.  Sua mon hoc";
+		cout << setw(30) << "9.  Sua ket qua" << endl;
+		cout << setw(30) << "10. Xoa sinh vien";
+		cout << setw(30) << "11. Xoa mon hoc";
+		cout << setw(30) << "12. Xoa ket qua" << endl;
+		cout << setw(30) << "13. Luu danh sach sinh vien";
+		cout << setw(30) << "14. Luu danh sach mon hoc";
+		cout << setw(30) << "15. Luu danh sach ket qua" << endl;
 		int chuc_nang = 0;
 		cout << "Chon chuc nang: ";
 		cin >> chuc_nang;
 		switch (chuc_nang)
 		{
 		case 1:
-			cout << "Danh sach sinh vien:" << endl;
 			ql.PrintStudent();
 			break;
 		case 2:
-			cout << "Danh sach mon hoc:" << endl;
 			ql.PrintSubject();
 			break;
 		case 3:
-			cout << "Danh sach ket qua:" << endl;
 			ql.PrintResult();
 			break;
 		case 4:
-			cout << "Them moi sinh vien:" << endl;
 			ql.AddStudent();
 			break;
 		case 5:
-			cout << "Them moi mon hoc:" << endl;
 			ql.AddSubject();
 			break;
 		case 6:
-			cout << "Them moi ket qua:" << endl;
 			ql.AddResult();
 			break;
 		case 7:
-			ql.RemoveStudent();
+			ql.EditStudent();
 			break;
 		case 8:
-			ql.RemoveSubject();
+			ql.EditSubject();
 			break;
 		case 9:
-			ql.RemoveResult();
+			ql.EditResult();
 			break;
 		case 10:
-			ql.WriteStudent("student.txt");
-			cout << "Da luu lai danh sach sinh vien!" << endl;
+			ql.RemoveStudent();
 			break;
 		case 11:
-			ql.WriteSubject("subject.txt");
-			cout << "Da luu lai danh sach mon hoc!" << endl;
+			ql.RemoveSubject();
 			break;
 		case 12:
+			ql.RemoveResult();
+			break;
+		case 13:
+			ql.WriteStudent("student.txt");
+			break;
+		case 14:
+			ql.WriteSubject("subject.txt");
+			break;
+		case 15:
 			ql.WriteStudent("result.txt");
-			cout << "Da luu lai danh sach ket qua!" << endl;
 			break;
 		default:
 			break;

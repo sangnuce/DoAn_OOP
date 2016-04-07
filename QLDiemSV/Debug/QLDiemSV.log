@@ -1,2 +1,8 @@
-﻿  quanly.cpp
+﻿  subject.cpp
+  student.cpp
+  result.cpp
+  quanly.cpp
+  main.cpp
+  Exception.cpp
+  Generating Code...
   QLDiemSV.vcxproj -> E:\Projects\QLDiemSV\Debug\QLDiemSV.exe
