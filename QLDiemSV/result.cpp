@@ -54,3 +54,9 @@ void Result::WriteFile(string filename) {
 	file << HocKy << "|" << MaMH << "|" << MaSV << "|" << DQT << "|" << DKT << endl;
 	file.close();
 }
+string Result::GetMaMH() {
+	return MaMH;
+}
+string Result::GetMaSV() {
+	return MaSV;
+}

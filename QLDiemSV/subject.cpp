@@ -54,3 +54,6 @@ void Subject::WriteFile(string filename) {
 	file << MaMH << "|" << TenMH << "|" << NhomMH << "|" << HocKy << "|" << SoTC << endl;
 	file.close();
 }
+string Subject::GetMaMH() {
+	return MaMH;
+}

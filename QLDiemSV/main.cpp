@@ -14,18 +14,20 @@ int main() {
 	ql.ReadStudent("student.txt");
 	ql.ReadSubject("subject.txt");
 	ql.ReadResult("result.txt");
-	char ch;
 	do {
 		cout << left;
-		cout << setw(30) << "1. Hien danh sach sinh vien";
-		cout << setw(30) << "2. Hien danh sach mon hoc";
-		cout << setw(30) << "3. Hien danh sach ket qua" << endl;
-		cout << setw(30) << "4. Them moi sinh vien";
-		cout << setw(30) << "5. Them moi mon hoc";
-		cout << setw(30) << "6. Them moi ket qua" << endl;
-		cout << setw(30) << "7. Luu danh sach sinh vien";
-		cout << setw(30) << "8. Luu danh sach mon hoc";
-		cout << setw(30) << "9. Luu danh sach ket qua" << endl;
+		cout << setw(30) << "1.  Hien danh sach sinh vien";
+		cout << setw(30) << "2.  Hien danh sach mon hoc";
+		cout << setw(30) << "3.  Hien danh sach ket qua" << endl;
+		cout << setw(30) << "4.  Them moi sinh vien";
+		cout << setw(30) << "5.  Them moi mon hoc";
+		cout << setw(30) << "6.  Them moi ket qua" << endl;
+		cout << setw(30) << "7.  Xoa sinh vien";
+		cout << setw(30) << "8.  Xoa mon hoc";
+		cout << setw(30) << "9.  Xoa ket qua" << endl;
+		cout << setw(30) << "10. Luu danh sach sinh vien";
+		cout << setw(30) << "11. Luu danh sach mon hoc";
+		cout << setw(30) << "12. Luu danh sach ket qua" << endl;
 		int chuc_nang = 0;
 		cout << "Chon chuc nang: ";
 		cin >> chuc_nang;
@@ -56,14 +58,23 @@ int main() {
 			ql.AddResult();
 			break;
 		case 7:
+			ql.RemoveStudent();
+			break;
+		case 8:
+			ql.RemoveSubject();
+			break;
+		case 9:
+			ql.RemoveResult();
+			break;
+		case 10:
 			ql.WriteStudent("student.txt");
 			cout << "Da luu lai danh sach sinh vien!" << endl;
 			break;
-		case 8:
+		case 11:
 			ql.WriteSubject("subject.txt");
 			cout << "Da luu lai danh sach mon hoc!" << endl;
 			break;
-		case 9:
+		case 12:
 			ql.WriteStudent("result.txt");
 			cout << "Da luu lai danh sach ket qua!" << endl;
 			break;
@@ -71,9 +82,8 @@ int main() {
 			break;
 		}
 		cout << "Tiep tuc chon chuc nang? (Y/N)" << endl;
-		fflush(stdin);
-		cin >> ch;
-	} while (strtoupper(ch) == 'Y');
+		cin.ignore();
+	} while (strtoupper(getchar()) == 'Y');
 
 	system("pause");
 	return 0;

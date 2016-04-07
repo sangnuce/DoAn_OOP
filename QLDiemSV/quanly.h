@@ -30,6 +30,11 @@ class QuanLy {
 		void AddStudent();
 		void AddSubject();
 		void AddResult();
+		void RemoveStudent(std::string = "");
+		void RemoveSubject(std::string = "");
+		void RemoveResult(std::string = "", std::string = "");
+		void RemoveResultByStudent(std::string = "");
+		void RemoveResultBySubject(std::string = "");
 };
 
 #endif

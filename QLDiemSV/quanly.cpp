@@ -70,8 +70,8 @@ void QuanLy::ReadStudent(string filename) {
 			}
 			else {
 				soSV++;
-				Student	*obj = new Student(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
-				sv[i] = *obj;
+				Student	obj(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
+				sv[i] = obj;
 			}
 		}
 	}
@@ -90,8 +90,8 @@ void QuanLy::ReadSubject(string filename) {
 			}
 			else {
 				soMH++;
-				Subject *obj = new Subject(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
-				mh[i] = *obj;
+				Subject obj(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
+				mh[i] = obj;
 			}
 		}
 	}
@@ -110,8 +110,8 @@ void QuanLy::ReadResult(string filename) {
 			}
 			else {
 				soKQ++;
-				Result *obj = new Result(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
-				kq[i] = *obj;
+				Result obj(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
+				kq[i] = obj;
 			}
 		}
 	}
@@ -163,25 +163,25 @@ void QuanLy::PrintResult() {
 }
 
 void QuanLy::AddStudent() {
-	Student *s = new Student();
-	s->Read();
-	sv[soSV] = *s;
+	Student s;
+	s.Read();
+	sv[soSV] = s;
 	//sv[soSV].WriteFile("student.txt");
 	soSV++;
 }
 
 void QuanLy::AddSubject() {
-	Subject *s = new Subject();
-	s->Read();
-	mh[soMH] = *s;
+	Subject s;
+	s.Read();
+	mh[soMH] = s;
 	//mh[soMH].WriteFile("subject.txt");
 	soMH++;
 }
 
 void QuanLy::AddResult() {
-	Result *s = new Result();
-	s->Read();
-	kq[soKQ] = *s;
+	Result s;
+	s.Read();
+	kq[soKQ] = s;
 	//kq[soKQ].WriteFile("result.txt");
 	soKQ++;
 }
@@ -204,5 +204,129 @@ void QuanLy::WriteResult(string filename) {
 	ClearFile(filename);
 	for (int i = 0; i < soKQ; i++) {
 		kq[i].WriteFile(filename);
+	}
+}
+
+void QuanLy::RemoveStudent(string masv) {
+	if (masv == "") {
+		cout << "Nhap ma SV can xoa: ";
+		fflush(stdin);
+		cin >> masv;
+	}
+	int i = -1;
+	for (i = 0; i < soSV; i++) {
+		if (sv[i].GetMaSV() == masv) {
+			break;
+		}
+	}
+	if (i < soSV) {
+		for (int j = i; j < soSV - 1; j++) {
+			sv[j] = sv[j + 1];
+		}
+		soSV--;
+		RemoveResultByStudent(masv);
+		cout << "Xoa thanh cong!" << endl;
+	}
+	else {
+		cout << "Khong tim thay sinh vien co MaSV = " << masv << endl;
+	}
+}
+
+void QuanLy::RemoveSubject(string mamh) {
+	if (mamh == "") {
+		cout << "Nhap ma MH can xoa: ";
+		fflush(stdin);
+		cin >> mamh;
+	}
+	int i = -1;
+	for (i = 0; i < soMH; i++) {
+		if (mh[i].GetMaMH() == mamh) {
+			break;
+		}
+	}
+	if (i < soMH) {
+		for (int j = i; j < soMH - 1; j++) {
+			mh[j] = mh[j + 1];
+		}
+		soMH--;
+		RemoveResultBySubject(mamh);
+		cout << "Xoa thanh cong!" << endl;
+	}
+	else {
+		cout << "Khong tim thay mon hoc co MaMH = " << mamh << endl;
+	}
+}
+
+void QuanLy::RemoveResult(string masv, string mamh) {
+	if (masv == "") {
+		cout << "Nhap ma SV can xoa ket qua: ";
+		fflush(stdin);
+		cin >> masv;
+	}
+	if (mamh == "") {
+		cout << "Nhap ma MH can xoa ket qua: ";
+		fflush(stdin);
+		cin >> mamh;
+	}
+	int i = -1;
+	for (i = 0; i < soKQ; i++) {
+		if (kq[i].GetMaSV() == masv && kq[i].GetMaMH() == mamh) {
+			break;
+		}
+	}
+	if (i < soKQ) {
+		for (int j = i; j < soKQ - 1; j++) {
+			kq[j] = kq[j + 1];
+		}
+		soKQ--;
+		cout << "Xoa thanh cong!" << endl;
+	}
+	else {
+		cout << "Khong tim thay ket qua co MaSV = " << masv << ", MaMH = " << mamh << endl;
+	}
+}
+
+void QuanLy::RemoveResultByStudent(string masv) {
+	if (masv == "") {
+		cout << "Nhap ma SV can xoa ket qua: ";
+		fflush(stdin);
+		cin >> masv;
+	}
+	int count = 0;
+	int i = 0;
+	while (i<soKQ){
+		if (kq[i].GetMaSV() == masv) {
+			RemoveResult(masv, kq[i].GetMaMH());
+			i--;
+			count++;
+		}
+		i++;
+	}
+	if (count > 0) {
+		cout << "Xoa thanh cong " << count << " ket qua!" << endl;
+	}
+	else {
+		cout << "Khong tim thay ket qua co MaSV = " << masv << endl;
+	}
+}
+
+void QuanLy::RemoveResultBySubject(string mamh) {
+	if (mamh == "") {
+		cout << "Nhap ma MH can xoa ket qua: ";
+		fflush(stdin);
+		cin >> mamh;
+	}
+	int count = 0;
+	for (int i = 0; i < soKQ; i++) {
+		if (kq[i].GetMaMH() == mamh) {
+			RemoveResult(kq[i].GetMaSV(), mamh);
+			count++;
+		}
+	}
+	if (count > 0) {
+		cout << "Xoa thanh cong " << count << " ket qua!" << endl;
+	}
+	else {
+		cout << "Khong tim thay ket qua co MaMH = " << mamh << endl;
 	}
 }

@@ -14,6 +14,7 @@ public:
 	Student();
 	Student(Student&);
 	Student(std::string, std::string, std::string, std::string, std::string);
+	std::string GetMaSV();
 	void Read();
 	void Display();
 	void WriteFile(std::string);

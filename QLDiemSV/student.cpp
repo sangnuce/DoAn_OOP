@@ -55,3 +55,6 @@ void Student::WriteFile(string filename) {
 	file << MaSV << "|" << HoTen << "|" << NgaySinh << "|" << GioiTinh << "|" << LopQL << endl;
 	file.close();
 }
+string Student::GetMaSV() {
+	return MaSV;
+}

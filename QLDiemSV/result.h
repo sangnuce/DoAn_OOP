@@ -14,6 +14,8 @@ public:
 	Result();
 	Result(Result&);
 	Result(std::string, std::string, std::string, float, float);
+	std::string GetMaMH();
+	std::string GetMaSV();
 	void Read();
 	void Display();
 	void WriteFile(std::string);

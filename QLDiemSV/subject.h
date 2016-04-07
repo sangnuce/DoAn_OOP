@@ -14,6 +14,7 @@ public:
 	Subject();
 	Subject(Subject&);
 	Subject(std::string, std::string, std::string, std::string, int);
+	std::string GetMaMH();
 	void Read();
 	void Display();
 	void WriteFile(std::string);
