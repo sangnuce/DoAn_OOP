@@ -3,18 +3,12 @@
 #include "quanly.h"
 using namespace std;
 
-char strtoupper(char ch) {
-	if (97 <= ch && ch <= 122)
-		ch -= 32;
-	return ch;
-}
-
 int main() {
 	QuanLy ql;
 	ql.ReadStudent("student.txt");
 	ql.ReadSubject("subject.txt");
 	ql.ReadResult("result.txt");
-	do {
+	while (true) {
 		cout << left;
 		cout << setw(30) << "1.  Hien danh sach sinh vien";
 		cout << setw(30) << "2.  Hien danh sach mon hoc";
@@ -82,11 +76,15 @@ int main() {
 			ql.WriteStudent("result.txt");
 			break;
 		default:
-			break;
+			cout << "Lua chon sai!" << endl;
+			continue;
 		}
-		cout << "Tiep tuc chon chuc nang? (Y/N)" << endl;
+		cout << "Tiep tuc chon chuc nang? (Y)" << endl;
 		cin.ignore();
-	} while (strtoupper(getchar()) == 'Y');
+		char ch = getchar();
+		if (ch == 'Y' || ch == 'y') continue;
+		else break;
+	}
 
 	system("pause");
 	return 0;

@@ -213,21 +213,29 @@ int QuanLy::FindResult(string masv, string mamh)
 }
 
 void QuanLy::AddStudent() {
-	cout << "Them moi sinh vien:" << endl;
 	Student obj;
 	obj.Read();
-	sv[soSV] = obj;
-	soSV++;
-	cout << "Them moi sinh vien thanh cong!" << endl;
+	if (FindStudent(obj.GetMaSV()) >= 0) {
+		cout << "Ma SV da ton tai trong he thong!" << endl;
+	}
+	else {
+		sv[soSV] = obj;
+		soSV++;
+		cout << "Them moi sinh vien thanh cong!" << endl;
+	}
 }
 
 void QuanLy::AddSubject() {
-	cout << "Them moi mon hoc:" << endl;
 	Subject obj;
 	obj.Read();
-	mh[soMH] = obj;
-	soMH++;
-	cout << "Them moi mon hoc thanh cong!" << endl;
+	if (FindSubject(obj.GetMaMH()) >= 0) {
+		cout << "Ma MH da ton tai trong he thong!" << endl;
+	}
+	else {
+		mh[soMH] = obj;
+		soMH++;
+		cout << "Them moi mon hoc thanh cong!" << endl;
+	}
 }
 
 void QuanLy::AddResult() {
@@ -244,32 +252,44 @@ void QuanLy::AddResult() {
 		AddResultBySubject();
 		break;
 	default:
+		cout << "Lua chon sai!" << endl;
+		AddResult();
 		break;
 	}
 }
 
 void QuanLy::AddResultByStudent() {
-	cout << "Them moi ket qua:" << endl;
 	string masv, mamh;
 	float dqt, dkt;
 	cout << "Nhap ma SV can them ket qua: ";
 	fflush(stdin);
 	cin >> masv;
-	int somh;
-	cout << "Nhap so mon hoc: ";
-	cin >> somh;
-	for (int i = 0; i < somh; i++) {
-		cout << "Nhap ma MH thu " << i + 1 << ": ";
-		fflush(stdin);
-		cin >> mamh;
-		cout << "Nhap DQT: ";
-		cin >> dqt;
-		cout << "Nhap DKT: ";
-		cin >> dkt;
-		Result obj(masv, mamh, dqt, dkt);
-		kq[soKQ] = obj;
-		soKQ++;
-		cout << "Them moi ket qua thanh cong!" << endl;
+	if (FindStudent(masv) >= 0) {
+		int somh;
+		cout << "Nhap so mon hoc: ";
+		cin >> somh;
+		for (int i = 0; i < somh; i++) {
+			cout << "Nhap ma MH thu " << i + 1 << ": ";
+			fflush(stdin);
+			cin >> mamh;
+			if (FindResult(masv, mamh) >= 0) {
+				cout << "Da ton tai ket qua co MaSV = " << masv << ", MaMH = " << mamh << " trong he thong!" << endl;
+			}
+			else {
+				cout << "Nhap DQT: ";
+				cin >> dqt;
+				cout << "Nhap DKT: ";
+				cin >> dkt;
+				Result obj(masv, mamh, dqt, dkt);
+				kq[soKQ] = obj;
+				soKQ++;
+				cout << "Them moi ket qua thanh cong!" << endl;
+			}
+		}
+	}
+	else {
+		cout << "Ma SV " << masv << " khong ton tai trong he thong!" << endl;
+		AddResultByStudent();
 	}
 }
 
@@ -280,21 +300,32 @@ void QuanLy::AddResultBySubject() {
 	cout << "Nhap ma MH can them ket qua: ";
 	fflush(stdin);
 	cin >> mamh;
-	int sosv;
-	cout << "Nhap so sinh vien: ";
-	cin >> sosv;
-	for (int i = 0; i < sosv; i++) {
-		cout << "Nhap ma SV thu " << i + 1 << ": ";
-		fflush(stdin);
-		cin >> masv;
-		cout << "Nhap DQT: ";
-		cin >> dqt;
-		cout << "Nhap DKT: ";
-		cin >> dkt;
-		Result obj(masv, mamh, dqt, dkt);
-		kq[soKQ] = obj;
-		soKQ++;
-		cout << "Them moi ket qua thanh cong!" << endl;
+	if (FindStudent(masv) >= 0) {
+		int sosv;
+		cout << "Nhap so sinh vien: ";
+		cin >> sosv;
+		for (int i = 0; i < sosv; i++) {
+			cout << "Nhap ma SV thu " << i + 1 << ": ";
+			fflush(stdin);
+			cin >> masv;
+			if (FindResult(masv, mamh) >= 0) {
+				cout << "Da ton tai ket qua co MaSV = " << masv << ", MaMH = " << mamh << " trong he thong!" << endl;
+			}
+			else {
+				cout << "Nhap DQT: ";
+				cin >> dqt;
+				cout << "Nhap DKT: ";
+				cin >> dkt;
+				Result obj(masv, mamh, dqt, dkt);
+				kq[soKQ] = obj;
+				soKQ++;
+				cout << "Them moi ket qua thanh cong!" << endl;
+			}
+		}
+	}
+	else {
+		cout << "Ma MH " << mamh << " khong ton tai trong he thong!" << endl;
+		AddResultBySubject();
 	}
 }
 
