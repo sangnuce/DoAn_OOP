@@ -6,30 +6,24 @@
 using namespace std;
 
 Result::Result() {
-	HocKy = "";
 	MaMH = "";
 	MaSV = "";
 	DQT = 0;
 	DKT = 0;
 }
 Result::Result(Result& rs) {
-	HocKy = rs.HocKy;
 	MaMH = rs.MaMH;
 	MaSV = rs.MaSV;
 	DQT = rs.DQT;
 	DKT = rs.DKT;
 }
-Result::Result(string hocky, string mamh, string masv, float dqt, float dkt) {
-	this->HocKy = hocky;
+Result::Result(string mamh, string masv, float dqt, float dkt) {
 	this->MaMH = mamh;
 	this->MaSV = masv;
 	this->DQT = dqt;
 	this->DKT = dkt;
 }
 void Result::Read() {
-	cout << "Hoc ky: ";
-	fflush(stdin);
-	cin >> HocKy;
 	cout << "Ma MH: ";
 	fflush(stdin);
 	cin >> MaMH;
@@ -42,7 +36,6 @@ void Result::Read() {
 	cin >> DKT;
 }
 void Result::Display() {
-	cout << setw(6) << HocKy << " | ";
 	cout << setw(8) << MaMH << " | ";
 	cout << setw(8) << MaSV << " | ";
 	cout << fixed;
@@ -51,7 +44,7 @@ void Result::Display() {
 }
 void Result::WriteFile(string filename) {
 	ofstream file(filename, ios::app);
-	file << HocKy << "|" << MaMH << "|" << MaSV << "|" << DQT << "|" << DKT << endl;
+	file << MaMH << "|" << MaSV << "|" << DQT << "|" << DKT << endl;
 	file.close();
 }
 string Result::GetMaMH() {

@@ -30,6 +30,8 @@ class QuanLy {
 		void AddStudent();
 		void AddSubject();
 		void AddResult();
+		void AddResultByStudent();
+		void AddResultBySubject();
 		void EditStudent();
 		void EditSubject();
 		void EditResult();

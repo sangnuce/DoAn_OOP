@@ -85,12 +85,12 @@ void QuanLy::ReadSubject(string filename) {
 		vector<vector<string>> info = ReadFile(filename);
 		soMH = 0;
 		for (size_t i = 0; i < info.size(); i++) {
-			if (info[i].size() != 5) {
+			if (info[i].size() != 3) {
 				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
 			}
 			else {
 				soMH++;
-				Subject obj(info[i][0], info[i][1], info[i][2], info[i][3], stoi(info[i][4]));
+				Subject obj(info[i][0], info[i][1], stoi(info[i][2]));
 				mh[i] = obj;
 			}
 		}
@@ -105,12 +105,12 @@ void QuanLy::ReadResult(string filename) {
 		vector<vector<string>> info = ReadFile(filename);
 		soKQ = 0;
 		for (size_t i = 0; i < info.size(); i++) {
-			if (info[i].size() != 5) {
+			if (info[i].size() != 4) {
 				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
 			}
 			else {
 				soKQ++;
-				Result obj(info[i][0], info[i][1], info[i][2], stof(info[i][3]), stof(info[i][4]));
+				Result obj(info[i][0], info[i][1], stof(info[i][2]), stof(info[i][3]));
 				kq[i] = obj;
 			}
 		}
@@ -137,32 +137,29 @@ void QuanLy::PrintStudent() {
 
 void QuanLy::PrintSubject() {
 	cout << "Danh sach mon hoc:" << endl;
-	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
 	cout << right << setw(8) << "Ma MH" << " | ";
 	cout << left << setw(50) << "Ten MH" << " | ";
-	cout << left << setw(7) << "Nhom MH" << " | ";
-	cout << right << setw(6) << "Hoc ky" << " | ";
 	cout << "So TC" << endl;
-	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
 	for (int i = 0; i < soMH; i++) {
 		mh[i].Display();
 	}
-	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
 }
 
 void QuanLy::PrintResult() {
 	cout << "Danh sach ket qua:" << endl;
-	cout << "-------------------------------------------" << endl;
-	cout << setw(6) << "Hoc ky" << " | ";
+	cout << "----------------------------------" << endl;
 	cout << setw(8) << "Ma MH" << " | ";
 	cout << setw(8) << "Ma SV" << " | ";
 	cout << setw(4) << "DQT" << " | ";
 	cout << setw(4) << "DKT" << endl;
-	cout << "-------------------------------------------" << endl;
+	cout << "----------------------------------" << endl;
 	for (int i = 0; i < soKQ; i++) {
 		kq[i].Display();
 	}
-	cout << "-------------------------------------------" << endl;
+	cout << "----------------------------------" << endl;
 }
 
 int QuanLy::FindStudent(string masv)
@@ -217,32 +214,88 @@ int QuanLy::FindResult(string masv, string mamh)
 
 void QuanLy::AddStudent() {
 	cout << "Them moi sinh vien:" << endl;
-	Student s;
-	s.Read();
-	sv[soSV] = s;
-	//sv[soSV].WriteFile("student.txt");
+	Student obj;
+	obj.Read();
+	sv[soSV] = obj;
 	soSV++;
 	cout << "Them moi sinh vien thanh cong!" << endl;
 }
 
 void QuanLy::AddSubject() {
 	cout << "Them moi mon hoc:" << endl;
-	Subject s;
-	s.Read();
-	mh[soMH] = s;
-	//mh[soMH].WriteFile("subject.txt");
+	Subject obj;
+	obj.Read();
+	mh[soMH] = obj;
 	soMH++;
 	cout << "Them moi mon hoc thanh cong!" << endl;
 }
 
 void QuanLy::AddResult() {
+	int x = 0;
+	cout << "1. Nhap ket qua theo sinh vien" << endl;
+	cout << "2. Nhap ket qua theo mon hoc" << endl;
+	cout << "Lua chon: ";
+	cin >> x;
+	switch (x) {
+	case 1:
+		AddResultByStudent();
+		break;
+	case 2:
+		AddResultBySubject();
+		break;
+	default:
+		break;
+	}
+}
+
+void QuanLy::AddResultByStudent() {
 	cout << "Them moi ket qua:" << endl;
-	Result s;
-	s.Read();
-	kq[soKQ] = s;
-	//kq[soKQ].WriteFile("result.txt");
-	soKQ++;
-	cout << "Them moi ket qua thanh cong!" << endl;
+	string masv, mamh;
+	float dqt, dkt;
+	cout << "Nhap ma SV can them ket qua: ";
+	fflush(stdin);
+	cin >> masv;
+	int somh;
+	cout << "Nhap so mon hoc: ";
+	cin >> somh;
+	for (int i = 0; i < somh; i++) {
+		cout << "Nhap ma MH thu " << i + 1 << ": ";
+		fflush(stdin);
+		cin >> mamh;
+		cout << "Nhap DQT: ";
+		cin >> dqt;
+		cout << "Nhap DKT: ";
+		cin >> dkt;
+		Result obj(masv, mamh, dqt, dkt);
+		kq[soKQ] = obj;
+		soKQ++;
+		cout << "Them moi ket qua thanh cong!" << endl;
+	}
+}
+
+void QuanLy::AddResultBySubject() {
+	cout << "Them moi ket qua:" << endl;
+	string masv, mamh;
+	float dqt, dkt;
+	cout << "Nhap ma MH can them ket qua: ";
+	fflush(stdin);
+	cin >> mamh;
+	int sosv;
+	cout << "Nhap so sinh vien: ";
+	cin >> sosv;
+	for (int i = 0; i < sosv; i++) {
+		cout << "Nhap ma SV thu " << i + 1 << ": ";
+		fflush(stdin);
+		cin >> masv;
+		cout << "Nhap DQT: ";
+		cin >> dqt;
+		cout << "Nhap DKT: ";
+		cin >> dkt;
+		Result obj(masv, mamh, dqt, dkt);
+		kq[soKQ] = obj;
+		soKQ++;
+		cout << "Them moi ket qua thanh cong!" << endl;
+	}
 }
 
 void QuanLy::EditStudent() {

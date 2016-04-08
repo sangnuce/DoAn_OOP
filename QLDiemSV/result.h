@@ -5,7 +5,6 @@
 
 class Result {
 private:
-	std::string HocKy;
 	std::string MaMH;
 	std::string MaSV;
 	float DQT;
@@ -13,7 +12,7 @@ private:
 public:
 	Result();
 	Result(Result&);
-	Result(std::string, std::string, std::string, float, float);
+	Result(std::string, std::string, float, float);
 	std::string GetMaMH();
 	std::string GetMaSV();
 	void Read();
