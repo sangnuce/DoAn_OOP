@@ -28,7 +28,7 @@ vector<vector<string>> QuanLy::ReadFile(string filename) {
 	ifstream file(filename);
 	vector<vector<string>> info;
 	if (file.fail()) {
-		throw Exception("Khong the mo file " + filename + "\n");
+		throw ExFileNotFound("Khong the mo file " + filename + "\n");
 		return info;
 	}
 	while (!file.eof()) {
@@ -61,62 +61,47 @@ void QuanLy::ClearFile(string filename) {
 }
 
 void QuanLy::ReadStudent(string filename) {
-	try {
-		vector<vector<string>> info = ReadFile(filename);
-		soSV = 0;
-		for (size_t i = 0; i < info.size(); i++) {
-			if (info[i].size() != 5) {
-				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
-			}
-			else {
-				soSV++;
-				Student	obj(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
-				sv[i] = obj;
-			}
+	vector<vector<string>> info = ReadFile(filename);
+	soSV = 0;
+	for (size_t i = 0; i < info.size(); i++) {
+		if (info[i].size() != 5) {
+			throw ExReadFileError("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
 		}
-	}
-	catch (Exception &ex) {
-		cout << ex.ToString();
+		else {
+			soSV++;
+			Student	obj(info[i][0], info[i][1], info[i][2], info[i][3], info[i][4]);
+			sv[i] = obj;
+		}
 	}
 }
 
 void QuanLy::ReadSubject(string filename) {
-	try {
-		vector<vector<string>> info = ReadFile(filename);
-		soMH = 0;
-		for (size_t i = 0; i < info.size(); i++) {
-			if (info[i].size() != 3) {
-				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
-			}
-			else {
-				soMH++;
-				Subject obj(info[i][0], info[i][1], stoi(info[i][2]));
-				mh[i] = obj;
-			}
+	vector<vector<string>> info = ReadFile(filename);
+	soMH = 0;
+	for (size_t i = 0; i < info.size(); i++) {
+		if (info[i].size() != 3) {
+			throw ExReadFileError("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
 		}
-	}
-	catch (Exception &ex) {
-		cout << ex.ToString();
+		else {
+			soMH++;
+			Subject obj(info[i][0], info[i][1], stoi(info[i][2]));
+			mh[i] = obj;
+		}
 	}
 }
 
 void QuanLy::ReadResult(string filename) {
-	try {
-		vector<vector<string>> info = ReadFile(filename);
-		soKQ = 0;
-		for (size_t i = 0; i < info.size(); i++) {
-			if (info[i].size() != 4) {
-				throw Exception("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
-			}
-			else {
-				soKQ++;
-				Result obj(info[i][0], info[i][1], stof(info[i][2]), stof(info[i][3]));
-				kq[i] = obj;
-			}
+	vector<vector<string>> info = ReadFile(filename);
+	soKQ = 0;
+	for (size_t i = 0; i < info.size(); i++) {
+		if (info[i].size() != 4) {
+			throw ExReadFileError("Cau truc du lieu trong file " + filename + " khong hop le! (Dong " + to_string(i + 1) + ")\n");
 		}
-	}
-	catch (Exception &ex) {
-		cout << ex.ToString();
+		else {
+			soKQ++;
+			Result obj(info[i][0], info[i][1], stof(info[i][2]), stof(info[i][3]));
+			kq[i] = obj;
+		}
 	}
 }
 
@@ -162,8 +147,7 @@ void QuanLy::PrintResult() {
 	cout << "----------------------------------" << endl;
 }
 
-int QuanLy::FindStudent(string masv)
-{
+int QuanLy::FindStudent(string masv) {
 	if (masv == "") {
 		cout << "Nhap ma SV can tim: ";
 		fflush(stdin);
@@ -177,8 +161,7 @@ int QuanLy::FindStudent(string masv)
 	return -1;
 }
 
-int QuanLy::FindSubject(string mamh)
-{
+int QuanLy::FindSubject(string mamh) {
 	if (mamh == "") {
 		cout << "Nhap ma MH can tim: ";
 		fflush(stdin);
@@ -192,8 +175,7 @@ int QuanLy::FindSubject(string mamh)
 	return -1;
 }
 
-int QuanLy::FindResult(string masv, string mamh)
-{
+int QuanLy::FindResult(string masv, string mamh) {
 	if (masv == "") {
 		cout << "Nhap ma SV can tim: ";
 		fflush(stdin);
@@ -489,7 +471,7 @@ void QuanLy::RemoveResultByStudent(string masv) {
 		cout << "Xoa thanh cong " << count << " ket qua!" << endl;
 	}
 	else {
-		cout << "Khong tim thay ket qua co MaSV = " << masv << endl;
+		cout << "Khong tim thay ket qua nao co MaSV = " << masv << endl;
 	}
 }
 
@@ -510,7 +492,7 @@ void QuanLy::RemoveResultBySubject(string mamh) {
 		cout << "Xoa thanh cong " << count << " ket qua!" << endl;
 	}
 	else {
-		cout << "Khong tim thay ket qua co MaMH = " << mamh << endl;
+		cout << "Khong tim thay ket qua nao co MaMH = " << mamh << endl;
 	}
 }
 

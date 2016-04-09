@@ -17,3 +17,19 @@ Exception::Exception(string m)
 string Exception::ToString() {
 	return msg;
 }
+
+ExFileNotFound::ExFileNotFound() {
+	msg = "";
+}
+
+ExFileNotFound::ExFileNotFound(string m) {
+	msg = m;
+}
+
+ExReadFileError::ExReadFileError() {
+	msg = "";
+}
+
+ExReadFileError::ExReadFileError(string m) {
+	msg = m;
+}
