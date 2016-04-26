@@ -7,9 +7,7 @@ using namespace std;
 int main() {
 	try {
 		QuanLy ql;
-		ql.ReadStudent("student.txt");
-		ql.ReadSubject("subject.txt");
-		ql.ReadResult("result.txt");
+		ql.Init();
 		while (true) {
 			cout << left;
 			cout << setw(30) << "1.  Hien danh sach sinh vien";
@@ -55,6 +53,7 @@ int main() {
 				break;
 			case 6:
 				ql.AddResult();
+				ql.CalGPA(); //Cap nhat lai diem cho danh sach sinh vien sau khi them moi ket qua.
 				break;
 			case 7:
 				ql.EditStudent();
@@ -64,15 +63,18 @@ int main() {
 				break;
 			case 9:
 				ql.EditResult();
+				ql.CalGPA(); //Cap nhat lai diem cho danh sach sinh vien sau khi cap nhat ket qua.
 				break;
 			case 10:
 				ql.RemoveStudent();
 				break;
 			case 11:
 				ql.RemoveSubject();
+				ql.CalGPA(); //Cap nhat lai diem cho danh sach sinh vien sau khi xoa mon hoc.
 				break;
 			case 12:
 				ql.RemoveResult();
+				ql.CalGPA(); //Cap nhat lai diem cho danh sach sinh vien sau khi xoa ket qua.
 				break;
 			case 13:
 				ql.WriteStudent("student.txt");
@@ -81,7 +83,7 @@ int main() {
 				ql.WriteSubject("subject.txt");
 				break;
 			case 15:
-				ql.WriteStudent("result.txt");
+				ql.WriteResult("result.txt");
 				break;
 			default:
 				cout << "Lua chon sai!" << endl;

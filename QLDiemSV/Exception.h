@@ -24,4 +24,10 @@ public:
 	ExReadFileError();
 	ExReadFileError(std::string);
 };
+
+class ExOutOfRange :public Exception {
+public:
+	ExOutOfRange();
+	ExOutOfRange(std::string);
+};
 #endif

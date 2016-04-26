@@ -5,25 +5,24 @@
 
 using namespace std;
 
-Subject::Subject() {
-	MaMH = "";
-	TenMH = "";
-	SoTC = 0;
-}
 Subject::Subject(Subject& mh) {
 	MaMH = mh.MaMH;
 	TenMH = mh.TenMH;
 	SoTC = mh.SoTC;
 }
+
 Subject::Subject(string mamh, string tenmh, int sotc) {
 	this->MaMH = mamh;
 	this->TenMH = tenmh;
 	this->SoTC = sotc;
 }
+
 void Subject::Read() {
-	cout << "Ma MH: ";
-	fflush(stdin);
-	cin >> MaMH;
+	if (MaMH == "") {
+		cout << "Ma MH: ";
+		fflush(stdin);
+		cin >> MaMH;
+	}
 	cout << "Ten MH: ";
 	cin.ignore();
 	getline(cin, TenMH);
@@ -42,4 +41,7 @@ void Subject::WriteFile(string filename) {
 }
 string Subject::GetMaMH() {
 	return MaMH;
+}
+int Subject::GetSoTC() {
+	return SoTC;
 }

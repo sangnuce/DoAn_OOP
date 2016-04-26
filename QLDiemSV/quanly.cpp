@@ -54,6 +54,14 @@ vector<vector<string>> QuanLy::ReadFile(string filename) {
 	return info;
 }
 
+void QuanLy::Init() {
+	ReadStudent("student.txt");
+	ReadSubject("subject.txt");
+	ReadResult("result.txt");
+	CalGPA();
+}
+
+
 void QuanLy::ClearFile(string filename) {
 	ofstream file(filename);
 	file.clear();
@@ -107,17 +115,21 @@ void QuanLy::ReadResult(string filename) {
 
 void QuanLy::PrintStudent() {
 	cout << "Danh sach sinh vien:" << endl;
-	cout << "----------------------------------------------------------------------" << endl;
+	cout << "-----------------------------------------------------------------------------" << endl;
 	cout << right << setw(8) << "Ma SV" << " | ";
 	cout << left << setw(30) << "Ho ten" << " | ";
 	cout << right << setw(10) << "Ngay sinh" << " | ";
 	cout << right << setw(3) << "GT" << " | ";
-	cout << left << "Lop QL" << endl;
-	cout << "----------------------------------------------------------------------" << endl;
-	for (int i = 0; i < soSV; i++) {
-		sv[i].Display();
+	cout << left << "Lop QL" << " | ";
+	cout << setw(4) << "DTB" << endl;
+	cout << "-----------------------------------------------------------------------------" << endl;
+	if (soSV == 0) cout << "\tKhong co du lieu" << endl;
+	else {
+		for (int i = 0; i < soSV; i++) {
+			sv[i].Display();
+		}
 	}
-	cout << "----------------------------------------------------------------------" << endl;
+	cout << "-----------------------------------------------------------------------------" << endl;
 }
 
 void QuanLy::PrintSubject() {
@@ -127,24 +139,31 @@ void QuanLy::PrintSubject() {
 	cout << left << setw(50) << "Ten MH" << " | ";
 	cout << "So TC" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
-	for (int i = 0; i < soMH; i++) {
-		mh[i].Display();
+	if (soMH == 0) cout << "\tKhong co du lieu" << endl;
+	else {
+		for (int i = 0; i < soMH; i++) {
+			mh[i].Display();
+		}
 	}
 	cout << "----------------------------------------------------------------------" << endl;
 }
 
 void QuanLy::PrintResult() {
 	cout << "Danh sach ket qua:" << endl;
-	cout << "----------------------------------" << endl;
+	cout << "-----------------------------------------" << endl;
 	cout << setw(8) << "Ma MH" << " | ";
 	cout << setw(8) << "Ma SV" << " | ";
 	cout << setw(4) << "DQT" << " | ";
-	cout << setw(4) << "DKT" << endl;
-	cout << "----------------------------------" << endl;
-	for (int i = 0; i < soKQ; i++) {
-		kq[i].Display();
+	cout << setw(4) << "DKT" << " | ";
+	cout << setw(4) << "DTB" << endl;
+	cout << "-----------------------------------------" << endl;
+	if (soKQ == 0) cout << "\tKhong co du lieu" << endl;
+	else {
+		for (int i = 0; i < soKQ; i++) {
+			kq[i].Display();
+		}
 	}
-	cout << "----------------------------------" << endl;
+	cout << "-----------------------------------------" << endl;
 }
 
 int QuanLy::FindStudent(string masv) {
@@ -177,12 +196,12 @@ int QuanLy::FindSubject(string mamh) {
 
 int QuanLy::FindResult(string masv, string mamh) {
 	if (masv == "") {
-		cout << "Nhap ma SV can tim: ";
+		cout << "Nhap ma SV: ";
 		fflush(stdin);
 		cin >> masv;
 	}
 	if (mamh == "") {
-		cout << "Nhap ma MH can tim: ";
+		cout << "Nhap ma MH: ";
 		fflush(stdin);
 		cin >> mamh;
 	}
@@ -195,12 +214,16 @@ int QuanLy::FindResult(string masv, string mamh) {
 }
 
 void QuanLy::AddStudent() {
-	Student obj;
-	obj.Read();
-	if (FindStudent(obj.GetMaSV()) >= 0) {
+	string masv;
+	cout << "Nhap ma SV: ";
+	cin.ignore();
+	getline(cin, masv);
+	if (FindStudent(masv) >= 0) {
 		cout << "Ma SV da ton tai trong he thong!" << endl;
 	}
 	else {
+		Student obj(masv);
+		obj.Read();
 		sv[soSV] = obj;
 		soSV++;
 		cout << "Them moi sinh vien thanh cong!" << endl;
@@ -208,12 +231,16 @@ void QuanLy::AddStudent() {
 }
 
 void QuanLy::AddSubject() {
-	Subject obj;
-	obj.Read();
-	if (FindSubject(obj.GetMaMH()) >= 0) {
+	string mamh;
+	cout << "Nhap ma MH: ";
+	cin.ignore();
+	getline(cin, mamh);
+	if (FindSubject(mamh) >= 0) {
 		cout << "Ma MH da ton tai trong he thong!" << endl;
 	}
 	else {
+		Subject obj(mamh);
+		obj.Read();
 		mh[soMH] = obj;
 		soMH++;
 		cout << "Them moi mon hoc thanh cong!" << endl;
@@ -221,11 +248,16 @@ void QuanLy::AddSubject() {
 }
 
 void QuanLy::AddResult() {
-	int x = 0;
 	cout << "1. Nhap ket qua theo sinh vien" << endl;
 	cout << "2. Nhap ket qua theo mon hoc" << endl;
 	cout << "Lua chon: ";
+	int x = 0;
 	cin >> x;
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		x = 0;
+	}
 	switch (x) {
 	case 1:
 		AddResultByStudent();
@@ -241,8 +273,7 @@ void QuanLy::AddResult() {
 }
 
 void QuanLy::AddResultByStudent() {
-	string masv, mamh;
-	float dqt, dkt;
+	string masv;
 	cout << "Nhap ma SV can them ket qua: ";
 	fflush(stdin);
 	cin >> masv;
@@ -250,23 +281,32 @@ void QuanLy::AddResultByStudent() {
 		int somh;
 		cout << "Nhap so mon hoc: ";
 		cin >> somh;
-		for (int i = 0; i < somh; i++) {
+		int i = 0;
+		while (i < somh) {
+			string mamh;
 			cout << "Nhap ma MH thu " << i + 1 << ": ";
 			fflush(stdin);
 			cin >> mamh;
-			if (FindResult(masv, mamh) >= 0) {
+			if (FindSubject(mamh) < 0) {
+				cout << "Khong ton tai mon hoc co MaMH = " << mamh << endl;
+				i--;
+			}
+			else if (FindResult(masv, mamh) >= 0) {
 				cout << "Da ton tai ket qua co MaSV = " << masv << ", MaMH = " << mamh << " trong he thong!" << endl;
+				i--;
 			}
 			else {
+				float dqt, dkt;
 				cout << "Nhap DQT: ";
 				cin >> dqt;
 				cout << "Nhap DKT: ";
 				cin >> dkt;
-				Result obj(masv, mamh, dqt, dkt);
+				Result obj(mamh, masv, dqt, dkt);
 				kq[soKQ] = obj;
 				soKQ++;
 				cout << "Them moi ket qua thanh cong!" << endl;
 			}
+			i++;
 		}
 	}
 	else {
@@ -276,33 +316,40 @@ void QuanLy::AddResultByStudent() {
 }
 
 void QuanLy::AddResultBySubject() {
-	cout << "Them moi ket qua:" << endl;
-	string masv, mamh;
-	float dqt, dkt;
+	string mamh;
 	cout << "Nhap ma MH can them ket qua: ";
 	fflush(stdin);
 	cin >> mamh;
-	if (FindStudent(masv) >= 0) {
+	if (FindSubject(mamh) >= 0) {
 		int sosv;
 		cout << "Nhap so sinh vien: ";
 		cin >> sosv;
-		for (int i = 0; i < sosv; i++) {
+		int i = 0;
+		while (i < sosv) {
+			string masv;
 			cout << "Nhap ma SV thu " << i + 1 << ": ";
 			fflush(stdin);
 			cin >> masv;
-			if (FindResult(masv, mamh) >= 0) {
+			if (FindStudent(masv) < 0) {
+				cout << "Khong ton tai sinh vien co MaSV = " << masv << endl;
+				i--;
+			}
+			else if (FindResult(masv, mamh) >= 0) {
 				cout << "Da ton tai ket qua co MaSV = " << masv << ", MaMH = " << mamh << " trong he thong!" << endl;
+				i--;
 			}
 			else {
+				float dqt, dkt;
 				cout << "Nhap DQT: ";
 				cin >> dqt;
 				cout << "Nhap DKT: ";
 				cin >> dkt;
-				Result obj(masv, mamh, dqt, dkt);
+				Result obj(mamh, masv, dqt, dkt);
 				kq[soKQ] = obj;
 				soKQ++;
 				cout << "Them moi ket qua thanh cong!" << endl;
 			}
+			i++;
 		}
 	}
 	else {
@@ -319,7 +366,7 @@ void QuanLy::EditStudent() {
 	int position = FindStudent(masv);
 	if (position >= 0) {
 		cout << "Nhap thong tin moi:" << endl;
-		Student obj;
+		Student obj(masv);
 		obj.Read();
 		sv[position] = obj;
 		cout << "Cap nhat thong tin thanh cong!" << endl;
@@ -338,7 +385,7 @@ void QuanLy::EditSubject()
 	int position = FindSubject(mamh);
 	if (position >= 0) {
 		cout << "Nhap thong tin moi:" << endl;
-		Subject obj;
+		Subject obj(mamh);
 		obj.Read();
 		mh[position] = obj;
 		cout << "Cap nhat thong tin thanh cong!" << endl;
@@ -362,7 +409,7 @@ void QuanLy::EditResult()
 	int position = FindResult(masv, mamh);
 	if (position >= 0) {
 		cout << "Nhap thong tin moi:" << endl;
-		Result obj;
+		Result obj(mamh,masv);
 		obj.Read();
 		kq[position] = obj;
 		cout << "Cap nhat thong tin thanh cong!" << endl;
@@ -459,7 +506,7 @@ void QuanLy::RemoveResultByStudent(string masv) {
 	}
 	int count = 0;
 	int i = 0;
-	while (i<soKQ){
+	while (i < soKQ) {
 		if (kq[i].GetMaSV() == masv) {
 			RemoveResult(masv, kq[i].GetMaMH());
 			i--;
@@ -518,4 +565,32 @@ void QuanLy::WriteResult(string filename) {
 		kq[i].WriteFile(filename);
 	}
 	cout << "Da luu lai danh sach ket qua!" << endl;
+}
+
+void QuanLy::CalGPA(string masv) {
+	if (masv == "") {
+		for (int i = 0; i < soSV; i++) {
+			CalGPA(sv[i].GetMaSV());
+		}
+	}
+	else {
+		int sv_index = FindStudent(masv);
+		if (sv_index == -1) {
+			cout << "Khong tim thay sv co MaSV = " << masv << endl;
+		}
+		else {
+			float tong = 0;
+			int tongTC = 0;
+			for (int i = 0; i < soKQ; i++) {
+				if (kq[i].GetMaSV() == masv) {
+					int mh_index = FindSubject(kq[i].GetMaMH());
+					int SoTC = mh[mh_index].GetSoTC();
+					tong += kq[i].CalAvg()*SoTC;
+					tongTC += SoTC;
+				}
+			}
+			if (tong > 0) tong /= tongTC;
+			sv[sv_index].SetGPA(tong);
+		}
+	}
 }

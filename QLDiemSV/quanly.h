@@ -17,6 +17,7 @@ class QuanLy {
 		QuanLy();
 		~QuanLy();
 		std::vector<std::vector<std::string>> ReadFile(std::string);
+		void Init();
 		void ClearFile(std::string);
 		void ReadStudent(std::string);
 		void ReadSubject(std::string);
@@ -43,6 +44,8 @@ class QuanLy {
 		void WriteStudent(std::string);
 		void WriteSubject(std::string);
 		void WriteResult(std::string);
+		void CalGPA(std::string = "");
+
 };
 
 #endif

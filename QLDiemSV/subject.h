@@ -7,14 +7,12 @@ class Subject {
 private:
 	std::string MaMH;
 	std::string TenMH;
-	std::string NhomMH;
-	std::string HocKy;
 	int SoTC;
 public:
-	Subject();
 	Subject(Subject&);
-	Subject(std::string, std::string, int);
+	Subject(std::string mamh = "", std::string tenmh = "", int sotc = 0);
 	std::string GetMaMH();
+	int GetSoTC();
 	void Read();
 	void Display();
 	void WriteFile(std::string);

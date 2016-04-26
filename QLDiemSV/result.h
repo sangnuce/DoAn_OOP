@@ -10,11 +10,11 @@ private:
 	float DQT;
 	float DKT;
 public:
-	Result();
 	Result(Result&);
-	Result(std::string, std::string, float, float);
+	Result(std::string mamh = "", std::string masv = "", float dqt = 0, float dkt = 0);
 	std::string GetMaMH();
 	std::string GetMaSV();
+	float CalAvg();
 	void Read();
 	void Display();
 	void WriteFile(std::string);
