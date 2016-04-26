@@ -41,6 +41,9 @@ class QuanLy {
 		void RemoveResult(std::string = "", std::string = "");
 		void RemoveResultByStudent(std::string = "");
 		void RemoveResultBySubject(std::string = "");
+		void SearchStudent();
+		void SearchSubject();
+		void SearchResult();
 		void WriteStudent(std::string);
 		void WriteSubject(std::string);
 		void WriteResult(std::string);

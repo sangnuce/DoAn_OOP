@@ -33,11 +33,3 @@ ExReadFileError::ExReadFileError() {
 ExReadFileError::ExReadFileError(string m) {
 	msg = m;
 }
-
-ExOutOfRange::ExOutOfRange() {
-	msg = "";
-}
-
-ExOutOfRange::ExOutOfRange(string m) {
-	msg = m;
-}

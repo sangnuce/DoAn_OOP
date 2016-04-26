@@ -216,8 +216,8 @@ int QuanLy::FindResult(string masv, string mamh) {
 void QuanLy::AddStudent() {
 	string masv;
 	cout << "Nhap ma SV: ";
-	cin.ignore();
-	getline(cin, masv);
+	fflush(stdin);
+	cin >> masv;
 	if (FindStudent(masv) >= 0) {
 		cout << "Ma SV da ton tai trong he thong!" << endl;
 	}
@@ -233,8 +233,8 @@ void QuanLy::AddStudent() {
 void QuanLy::AddSubject() {
 	string mamh;
 	cout << "Nhap ma MH: ";
-	cin.ignore();
-	getline(cin, mamh);
+	fflush(stdin);
+	cin >> mamh;
 	if (FindSubject(mamh) >= 0) {
 		cout << "Ma MH da ton tai trong he thong!" << endl;
 	}
@@ -541,6 +541,69 @@ void QuanLy::RemoveResultBySubject(string mamh) {
 	else {
 		cout << "Khong tim thay ket qua nao co MaMH = " << mamh << endl;
 	}
+}
+
+void QuanLy::SearchStudent() {
+	string masv;
+	cout << "Nhap MaSV can tim: ";
+	fflush(stdin);
+	cin >> masv;
+	int sv_index = FindStudent(masv);
+	if (sv_index >= 0) {
+		cout << "-----------------------------------------------------------------------------" << endl;
+		cout << right << setw(8) << "Ma SV" << " | ";
+		cout << left << setw(30) << "Ho ten" << " | ";
+		cout << right << setw(10) << "Ngay sinh" << " | ";
+		cout << right << setw(3) << "GT" << " | ";
+		cout << left << "Lop QL" << " | ";
+		cout << setw(4) << "DTB" << endl;
+		cout << "-----------------------------------------------------------------------------" << endl;
+		sv[sv_index].Display();
+		cout << "-----------------------------------------------------------------------------" << endl;
+	}
+	else cout << "Khong tim thay sinh vien co MaSV = " << masv << endl;
+}
+
+void QuanLy::SearchSubject() {
+	string mamh;
+	cout << "Nhap MaMH can tim: ";
+	fflush(stdin);
+	cin >> mamh;
+	int mh_index = FindSubject(mamh);
+	if (mh_index >= 0) {
+		cout << "----------------------------------------------------------------------" << endl;
+		cout << right << setw(8) << "Ma MH" << " | ";
+		cout << left << setw(50) << "Ten MH" << " | ";
+		cout << "So TC" << endl;
+		cout << "----------------------------------------------------------------------" << endl;
+		mh[mh_index].Display();
+		cout << "----------------------------------------------------------------------" << endl;
+	}
+	else cout << "Khong tim thay mon hoc co MaMH = " << mamh << endl;
+}
+
+void QuanLy::SearchResult() {
+	string mamh;
+	cout << "Nhap MaMH can tim: ";
+	fflush(stdin);
+	cin >> mamh;
+	string masv;
+	cout << "Nhap MaSV can tim: ";
+	fflush(stdin);
+	cin >> masv;
+	int kq_index = FindResult(masv, mamh);
+	if (kq_index >= 0) {
+		cout << "-----------------------------------------" << endl;
+		cout << setw(8) << "Ma MH" << " | ";
+		cout << setw(8) << "Ma SV" << " | ";
+		cout << setw(4) << "DQT" << " | ";
+		cout << setw(4) << "DKT" << " | ";
+		cout << setw(4) << "DTB" << endl;
+		cout << "-----------------------------------------" << endl;
+		kq[kq_index].Display();
+		cout << "-----------------------------------------" << endl;
+	}
+	else cout << "Khong tim thay ket qua co MaMH = " << mamh << ", MaSV = " << masv << endl;
 }
 
 void QuanLy::WriteStudent(string filename) {

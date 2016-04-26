@@ -22,9 +22,12 @@ int main() {
 			cout << setw(30) << "10. Xoa sinh vien";
 			cout << setw(30) << "11. Xoa mon hoc";
 			cout << setw(30) << "12. Xoa ket qua" << endl;
-			cout << setw(30) << "13. Luu danh sach sinh vien";
-			cout << setw(30) << "14. Luu danh sach mon hoc";
-			cout << setw(30) << "15. Luu danh sach ket qua" << endl;
+			cout << setw(30) << "13. Tim kiem sinh vien";
+			cout << setw(30) << "14. Tim kiem mon hoc";
+			cout << setw(30) << "15. Tim kiem ket qua" << endl;
+			cout << setw(30) << "16. Luu danh sach sinh vien";
+			cout << setw(30) << "17. Luu danh sach mon hoc";
+			cout << setw(30) << "18. Luu danh sach ket qua" << endl;
 
 			int chuc_nang = 0;
 			cout << "Chon chuc nang: ";
@@ -77,12 +80,21 @@ int main() {
 				ql.CalGPA(); //Cap nhat lai diem cho danh sach sinh vien sau khi xoa ket qua.
 				break;
 			case 13:
-				ql.WriteStudent("student.txt");
+				ql.SearchStudent();
 				break;
 			case 14:
-				ql.WriteSubject("subject.txt");
+				ql.SearchSubject();
 				break;
 			case 15:
+				ql.SearchResult();
+				break;
+			case 16:
+				ql.WriteStudent("student.txt");
+				break;
+			case 17:
+				ql.WriteSubject("subject.txt");
+				break;
+			case 18:
 				ql.WriteResult("result.txt");
 				break;
 			default:
