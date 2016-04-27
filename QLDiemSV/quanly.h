@@ -16,12 +16,12 @@ class QuanLy {
 	public:
 		QuanLy();
 		~QuanLy();
-		std::vector<std::vector<std::string>> ReadFile(std::string);
+		std::vector<std::vector<std::string>> ReadFile(std::string) throw(ExFileNotFound);
 		void Init();
 		void ClearFile(std::string);
-		void ReadStudent(std::string);
-		void ReadSubject(std::string);
-		void ReadResult(std::string);
+		void ReadStudent(std::string) throw(ExReadFileError);
+		void ReadSubject(std::string) throw(ExReadFileError);
+		void ReadResult(std::string) throw(ExReadFileError);
 		void PrintStudent();
 		void PrintSubject();
 		void PrintResult();

@@ -108,8 +108,14 @@ int main() {
 			else break;
 		}
 	}
-	catch (Exception& ex){
+	catch (ExFileNotFound& ex) {
 		cout << ex.ToString() << endl;
+	}
+	catch (ExReadFileError& ex) {
+		cout << ex.ToString() << endl;
+	}
+	catch (...) {
+		cout << "Co ngoai le xay ra!" << endl;
 	}
 	system("pause");
 	return 0;

@@ -8,21 +8,20 @@ class Exception
 protected:
 	std::string msg;
 public:
-	Exception();
-	Exception(std::string);
-	std::string ToString();
+	Exception(std::string msg = "");
+	virtual std::string ToString() = 0;
 };
 
 class ExFileNotFound :public Exception {
 public:
-	ExFileNotFound();
-	ExFileNotFound(std::string);
+	ExFileNotFound(std::string msg = "");
+	virtual std::string ToString();
 };
 
 class ExReadFileError :public Exception {
 public:
-	ExReadFileError();
-	ExReadFileError(std::string);
+	ExReadFileError(std::string msg = "");
+	virtual std::string ToString();
 };
 
 #endif

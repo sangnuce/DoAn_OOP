@@ -4,32 +4,25 @@
 
 using namespace std;
 
-Exception::Exception()
+Exception::Exception(string msg)
 {
-	msg = "";
-}
-
-Exception::Exception(string m)
-{
-	msg = m;
+	this->msg = msg;
 }
 
 string Exception::ToString() {
 	return msg;
 }
 
-ExFileNotFound::ExFileNotFound() {
-	msg = "";
+ExFileNotFound::ExFileNotFound(string msg) : Exception(msg) {
 }
 
-ExFileNotFound::ExFileNotFound(string m) {
-	msg = m;
+string ExFileNotFound::ToString() {
+	return ("ExFileNotFound Exception: " + msg);
 }
 
-ExReadFileError::ExReadFileError() {
-	msg = "";
+ExReadFileError::ExReadFileError(string msg) : Exception(msg) {
 }
 
-ExReadFileError::ExReadFileError(string m) {
-	msg = m;
+string ExReadFileError::ToString() {
+	return ("ExReadFileError Exception: " + msg);
 }
