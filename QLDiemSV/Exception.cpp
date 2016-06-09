@@ -9,20 +9,22 @@ Exception::Exception(string msg)
 	this->msg = msg;
 }
 
-string Exception::ToString() {
-	return msg;
+ExFileNotFound::ExFileNotFound(string msg)
+{
+	this->msg = msg;
 }
 
-ExFileNotFound::ExFileNotFound(string msg) : Exception(msg) {
-}
-
-string ExFileNotFound::ToString() {
+string ExFileNotFound::ToString()
+{
 	return ("ExFileNotFound Exception: " + msg);
 }
 
-ExReadFileError::ExReadFileError(string msg) : Exception(msg) {
+ExReadFileError::ExReadFileError(string msg)
+{
+	this->msg = msg;
 }
 
-string ExReadFileError::ToString() {
+string ExReadFileError::ToString()
+{
 	return ("ExReadFileError Exception: " + msg);
 }
