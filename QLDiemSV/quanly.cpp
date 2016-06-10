@@ -248,8 +248,8 @@ void QuanLy::AddSubject() {
 }
 
 void QuanLy::AddResult() {
-	cout << "1. Nhap ket qua theo sinh vien" << endl;
-	cout << "2. Nhap ket qua theo mon hoc" << endl;
+	cout << "1. Nhap ket qua theo ma sinh vien" << endl;
+	cout << "2. Nhap ket qua theo ma mon hoc" << endl;
 	cout << "Lua chon: ";
 	int x = 0;
 	cin >> x;
@@ -293,7 +293,6 @@ void QuanLy::AddResultByStudent() {
 			}
 			else if (FindResult(masv, mamh) >= 0) {
 				cout << "Da ton tai ket qua co MaSV = " << masv << ", MaMH = " << mamh << " trong he thong!" << endl;
-				i--;
 			}
 			else {
 				float dqt, dkt;
@@ -336,7 +335,6 @@ void QuanLy::AddResultBySubject() {
 			}
 			else if (FindResult(masv, mamh) >= 0) {
 				cout << "Da ton tai ket qua co MaSV = " << masv << ", MaMH = " << mamh << " trong he thong!" << endl;
-				i--;
 			}
 			else {
 				float dqt, dkt;

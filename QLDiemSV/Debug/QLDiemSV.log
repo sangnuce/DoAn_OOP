@@ -1,15 +1,6 @@
-﻿  Exception.cpp
-  Generating Code...
-  Compiling...
-  quanly.cpp
+﻿  quanly.cpp
 e:\projects\qldiemsv\qldiemsv\quanly.h(19): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 e:\projects\qldiemsv\qldiemsv\quanly.h(22): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 e:\projects\qldiemsv\qldiemsv\quanly.h(23): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 e:\projects\qldiemsv\qldiemsv\quanly.h(24): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-  main.cpp
-e:\projects\qldiemsv\qldiemsv\quanly.h(19): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-e:\projects\qldiemsv\qldiemsv\quanly.h(22): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-e:\projects\qldiemsv\qldiemsv\quanly.h(23): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-e:\projects\qldiemsv\qldiemsv\quanly.h(24): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-  Generating Code...
   QLDiemSV.vcxproj -> E:\Projects\QLDiemSV\Debug\QLDiemSV.exe
