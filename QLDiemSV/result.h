@@ -14,6 +14,8 @@ public:
 	Result(std::string mamh = "", std::string masv = "", float dqt = 0, float dkt = 0);
 	std::string GetMaMH();
 	std::string GetMaSV();
+	void SetMaMH(std::string);
+	void SetMaSV(std::string);
 	float CalAvg();
 	void Read();
 	void Display();

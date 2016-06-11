@@ -59,6 +59,17 @@ string Result::GetMaSV() {
 	return MaSV;
 }
 
+void Result::SetMaMH(string mamh)
+{
+	MaMH = mamh;
+}
+
+void Result::SetMaSV(string masv)
+{
+	MaSV = masv;
+}
+
+
 float Result::CalAvg() {
 	float DTB = ((DQT * (float)0.3) + (DKT * (float)0.7));
 	//làm tròn kết quả và trả về:

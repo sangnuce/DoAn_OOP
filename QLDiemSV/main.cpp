@@ -25,20 +25,21 @@ int main() {
 			cout << setw(30) << "13. Tim kiem sinh vien";
 			cout << setw(30) << "14. Tim kiem mon hoc";
 			cout << setw(30) << "15. Tim kiem ket qua" << endl;
-			cout << setw(30) << "16. Luu danh sach sinh vien";
-			cout << setw(30) << "17. Luu danh sach mon hoc";
-			cout << setw(30) << "18. Luu danh sach ket qua" << endl;
 
-			int chuc_nang = 0;
-			cout << "Chon chuc nang: ";
+			int chuc_nang = -1;
+			cout << "Chon chuc nang (Thoat - 0): ";
 			cin >> chuc_nang;
 			if (cin.fail()) {
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				chuc_nang = 0;
+				chuc_nang = -1;
 			}
+			bool thoat = false;
 			switch (chuc_nang)
 			{
+			case 0:
+				thoat = true;
+				break;
 			case 1:
 				ql.PrintStudent();
 				break;
@@ -88,24 +89,11 @@ int main() {
 			case 15:
 				ql.SearchResult();
 				break;
-			case 16:
-				ql.WriteStudent("student.txt");
-				break;
-			case 17:
-				ql.WriteSubject("subject.txt");
-				break;
-			case 18:
-				ql.WriteResult("result.txt");
-				break;
 			default:
 				cout << "Lua chon sai!" << endl;
 				continue;
 			}
-			cout << "Tiep tuc chon chuc nang? (Y)" << endl;
-			cin.ignore();
-			char ch = getchar();
-			if (ch == 'Y' || ch == 'y') continue;
-			else break;
+			if (thoat) break;
 		}
 	}
 	catch (ExFileNotFound& ex) {

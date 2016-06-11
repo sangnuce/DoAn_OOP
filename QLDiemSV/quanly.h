@@ -36,6 +36,8 @@ class QuanLy {
 		void EditStudent();
 		void EditSubject();
 		void EditResult();
+		void EditResultStudentID(std::string oldID, std::string newID);
+		void EditResultSubjectID(std::string oldID, std::string newID);
 		void RemoveStudent(std::string = "");
 		void RemoveSubject(std::string = "");
 		void RemoveResult(std::string = "", std::string = "");
